@@ -7,7 +7,7 @@
 	  
 	  <Title>Integration Test Host</Title>
 	  <PackageId>Integration.Test.Host</PackageId>
-	  <Version>8.0.0-alpha</Version>
+	  <Version>8.0.0</Version>
 	  <Authors>VictorGazzinelli</Authors>
 	  
 	  <Description>A basic test host for integration testing.</Description>
