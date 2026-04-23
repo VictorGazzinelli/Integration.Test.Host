@@ -18,12 +18,28 @@ namespace Integration.Test.Host
         {
             string requestUri = BuildRequestUriWithQueryParams(configuration.RequestUri, configuration.Parameters);
 
+            if(configuration.Headers != null)
+            {
+                foreach (var header in configuration.Headers)
+                {
+                    httpClient.DefaultRequestHeaders.Add(header.Key, header.Value);
+                }
+            }
+
             return await httpClient.GetAsync(requestUri, cancellationToken);
         }
 
         public static async Task<HttpResponseMessage> DoPostRequestAsync(this HttpClient httpClient, HttpRequestConfiguration configuration, CancellationToken cancellationToken = default, string requestContentMediaType = MediaTypeNames.Application.Json)
         {
             HttpContent httpConent = BuildHttpContent(configuration.Parameters, requestContentMediaType);
+
+            if (configuration.Headers != null)
+            {
+                foreach (var header in configuration.Headers)
+                {
+                    httpClient.DefaultRequestHeaders.Add(header.Key, header.Value);
+                }
+            }
 
             return await httpClient.PostAsync(configuration.RequestUri, httpConent, cancellationToken);
         }
@@ -32,6 +48,14 @@ namespace Integration.Test.Host
         {
             HttpContent httpConent = BuildHttpContent(configuration.Parameters, requestContentMediaType);
 
+            if (configuration.Headers != null)
+            {
+                foreach (var header in configuration.Headers)
+                {
+                    httpClient.DefaultRequestHeaders.Add(header.Key, header.Value);
+                }
+            }
+
             return await httpClient.PutAsync(configuration.RequestUri, httpConent, cancellationToken);
         }
 
@@ -39,12 +63,28 @@ namespace Integration.Test.Host
         {
             HttpContent httpConent = BuildHttpContent(configuration.Parameters, requestContentMediaType);
 
+            if (configuration.Headers != null)
+            {
+                foreach (var header in configuration.Headers)
+                {
+                    httpClient.DefaultRequestHeaders.Add(header.Key, header.Value);
+                }
+            }
+
             return await httpClient.PutAsync(configuration.RequestUri, httpConent, cancellationToken);
         }
 
         public static async Task<HttpResponseMessage> DoDeleteRequestAsync(this HttpClient httpClient, HttpRequestConfiguration configuration, CancellationToken cancellationToken = default, string requestContentMediaType = MediaTypeNames.Application.Json)
         {
             string requestUri = BuildRequestUriWithQueryParams(configuration.RequestUri, configuration.Parameters);
+
+            if (configuration.Headers != null)
+            {
+                foreach (var header in configuration.Headers)
+                {
+                    httpClient.DefaultRequestHeaders.Add(header.Key, header.Value);
+                }
+            }
 
             return await httpClient.DeleteAsync(requestUri, cancellationToken);
         }
