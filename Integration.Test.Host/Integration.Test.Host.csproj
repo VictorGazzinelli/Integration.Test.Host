@@ -7,7 +7,7 @@
 	  
 	  <Title>Integration Test Host</Title>
 	  <PackageId>Integration.Test.Host</PackageId>
-	  <Version>8.0.1</Version>
+	  <Version>8.0.2-alpha</Version>
 	  <Authors>VictorGazzinelli</Authors>
 	  
 	  <Description>A basic test host for integration testing.</Description>
@@ -16,7 +16,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.AspNetCore.Mvc.Testing" Version="8.0.25" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Testing" Version="8.0.26" />
     <PackageReference Include="Microsoft.Extensions.Configuration" Version="8.0.0" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="8.0.1" />
     <PackageReference Include="Microsoft.Extensions.Options" Version="8.0.2" />

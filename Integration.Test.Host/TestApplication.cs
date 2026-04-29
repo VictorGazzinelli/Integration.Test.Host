@@ -24,6 +24,13 @@ namespace Integration.Test.Host
         protected T GetService<T>() => (T)fixture.Services.GetService(typeof(T));
         protected IOptions<T> GetServiceOptions<T>() where T : class => (IOptions<T>)fixture.Services.GetService(typeof(IOptions<T>));
         protected IOptionsSnapshot<T> GetServiceOptionsSnapshot<T>() where T : class => (IOptionsSnapshot<T>)fixture.Services.GetService(typeof(IOptionsSnapshot<T>));
+        protected async Task<HttpStatusCode> DoRequest(HttpRequestConfiguration configuration, CancellationToken cancellationToken = default)
+        {
+            HttpResponseMessage httpResponse = await client.ExecuteHttpRequestAsync(configuration, cancellationToken);
+
+            return httpResponse.StatusCode;
+        }
+
         protected async Task<(HttpStatusCode statusCode, T response)> DoRequest<T>(HttpRequestConfiguration configuration, CancellationToken cancellationToken = default)
         {
             HttpResponseMessage httpResponse = await client.ExecuteHttpRequestAsync(configuration, cancellationToken);
