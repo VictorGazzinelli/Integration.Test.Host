@@ -71,7 +71,7 @@ namespace Integration.Test.Host
                 }
             }
 
-            return await httpClient.PutAsync(configuration.RequestUri, httpConent, cancellationToken);
+            return await httpClient.PatchAsync(configuration.RequestUri, httpConent, cancellationToken);
         }
 
         public static async Task<HttpResponseMessage> DoDeleteRequestAsync(this HttpClient httpClient, HttpRequestConfiguration configuration, CancellationToken cancellationToken = default, string requestContentMediaType = MediaTypeNames.Application.Json)
