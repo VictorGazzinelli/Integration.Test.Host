@@ -26,7 +26,7 @@ namespace Integration.Test.Host
 
         public static async Task<HttpResponseMessage> DoPostRequestAsync(this HttpClient httpClient, HttpRequestConfiguration configuration, CancellationToken cancellationToken = default, string requestContentMediaType = MediaTypeNames.Application.Json)
         {
-            HttpContent httpContent = BuildHttpContent(configuration.Parameters, requestContentMediaType);
+            HttpContent httpContent = BuildHttpContent(configuration.Parameters, requestContentMediaType, configuration.JsonSerializerSettings);
 
             httpClient.AddHeadersIfNotExists(configuration.Headers);
 
@@ -35,7 +35,7 @@ namespace Integration.Test.Host
 
         public static async Task<HttpResponseMessage> DoPutRequestAsync(this HttpClient httpClient, HttpRequestConfiguration configuration, CancellationToken cancellationToken = default, string requestContentMediaType = MediaTypeNames.Application.Json)
         {
-            HttpContent httpContent = BuildHttpContent(configuration.Parameters, requestContentMediaType);
+            HttpContent httpContent = BuildHttpContent(configuration.Parameters, requestContentMediaType, configuration.JsonSerializerSettings);
 
             httpClient.AddHeadersIfNotExists(configuration.Headers);
 
@@ -44,7 +44,7 @@ namespace Integration.Test.Host
 
         public static async Task<HttpResponseMessage> DoPatchRequestAsync(this HttpClient httpClient, HttpRequestConfiguration configuration, CancellationToken cancellationToken = default, string requestContentMediaType = MediaTypeNames.Application.Json)
         {
-            HttpContent httpContent = BuildHttpContent(configuration.Parameters, requestContentMediaType);
+            HttpContent httpContent = BuildHttpContent(configuration.Parameters, requestContentMediaType, configuration.JsonSerializerSettings);
 
             httpClient.AddHeadersIfNotExists(configuration.Headers);
 
@@ -95,12 +95,12 @@ namespace Integration.Test.Host
             return string.Join("&", stringParameters);
         }
 
-        public static HttpContent BuildHttpContent(object parameters, string requestContentMediaType = MediaTypeNames.Application.Json)
+        public static HttpContent BuildHttpContent(object parameters, string requestContentMediaType = MediaTypeNames.Application.Json, JsonSerializerSettings jsonSerializerSettings = null)
         {
             if (parameters == null)
                 return new StringContent("", Encoding.UTF8, requestContentMediaType);
             if (requestContentMediaType == MediaTypeNames.Application.Json)
-                return new StringContent(JsonConvert.SerializeObject(parameters), Encoding.UTF8, requestContentMediaType);
+                return new StringContent(JsonConvert.SerializeObject(parameters, jsonSerializerSettings), Encoding.UTF8, requestContentMediaType);
             if (requestContentMediaType == "application/x-www-form-urlencoded")
                 return new StringContent(BuildAsQueryString(parameters), Encoding.UTF8, requestContentMediaType);
             
